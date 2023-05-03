@@ -55,6 +55,7 @@ class _InputState extends State<Input> {
             }.contains(el),
           )) {
         if (event is KeyUpEvent) {
+          print("두번 호출? KeyUpEvent");
           _handleSendPressed();
         }
         return KeyEventResult.handled;
