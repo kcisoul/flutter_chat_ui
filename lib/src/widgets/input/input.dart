@@ -126,7 +126,7 @@ class _InputState extends State<Input> {
 
   void _handleTextControllerChange() {
     setState(() {
-      _sendButtonVisible = _textController.text.trim() != '';
+      _sendButtonVisible = true;
     });
   }
 
@@ -259,7 +259,7 @@ class InputOptions {
 
   /// Controls the [Input] clear behavior. Defaults to [InputClearMode.always].
   final InputClearMode inputClearMode;
-  
+
   /// Controls the [Input] keyboard type. Defaults to [TextInputType.multiline].
   final TextInputType keyboardType;
 
