@@ -218,7 +218,7 @@ class _ChatPageState extends State<ChatPage> {
     final textMessage = types.TextMessage(
       author: _user,
       createdAt: DateTime.now().millisecondsSinceEpoch,
-      id: const Uuid().v4(),
+      id: "test",
       text: message.text,
     );
 
