@@ -115,7 +115,7 @@ class _InputState extends State<Input> {
   void _handleSendPressed() {
     //final trimmedText = _textController.text.trim();
     if (_textController.text != '') {
-      final partialText = types.PartialText(text: _textController.text);
+      final partialText = types.PartialText(text: "${_textController.text} ");
       _textController.clear();
       widget.onSendPressed(partialText);
 
