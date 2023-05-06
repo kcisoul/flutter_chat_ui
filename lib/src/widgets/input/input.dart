@@ -146,7 +146,7 @@ class _InputState extends State<Input> {
         .theme
         .inputPadding
         .copyWith(left: 16, right: 16);
-    final safeAreaInsets = isMobile
+    var safeAreaInsets = isMobile
         ? EdgeInsets.fromLTRB(
             query.padding.left,
             0,
@@ -154,6 +154,14 @@ class _InputState extends State<Input> {
             query.viewInsets.bottom + query.padding.bottom,
           )
         : EdgeInsets.zero;
+    if (kIsWeb && defaultTargetPlatform == TargetPlatform.iOS) {
+      safeAreaInsets = EdgeInsets.fromLTRB(
+        query.padding.left,
+        0,
+        query.padding.right,
+        query.padding.bottom,
+      );
+    }
     final textPadding = InheritedChatTheme.of(context)
         .theme
         .inputPadding
