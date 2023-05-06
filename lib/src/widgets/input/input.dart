@@ -55,7 +55,6 @@ class _InputState extends State<Input> {
             }.contains(el),
           )) {
         if (event is KeyUpEvent) {
-          print("두번 호출? KeyUpEvent");
           _handleSendPressed();
         }
         return KeyEventResult.handled;
@@ -65,11 +64,20 @@ class _InputState extends State<Input> {
     },
   );
 
+  bool _focused = false;
+
   bool _sendButtonVisible = false;
   late TextEditingController _textController;
 
   @override
   void initState() {
+    _inputFocusNode.addListener(() {
+      if (_inputFocusNode.hasFocus != _focused) {
+        print("focus changed");
+        (widget.options.onFocusChanged ?? () {})(_inputFocusNode.hasFocus);
+      }
+      _focused = _inputFocusNode.hasFocus;
+    });
     super.initState();
 
     _textController =
@@ -252,6 +260,7 @@ class InputOptions {
     this.keyboardType = TextInputType.multiline,
     this.onTextChanged,
     this.onTextFieldTap,
+    this.onFocusChanged,
     this.sendButtonVisibilityMode = SendButtonVisibilityMode.editing,
     this.textEditingController,
     this.autocorrect = true,
@@ -267,6 +276,9 @@ class InputOptions {
 
   /// Will be called whenever the text inside [TextField] changes.
   final void Function(String)? onTextChanged;
+
+  // Will be called  on _inputFocusNode focus changed.
+  final void Function(bool focus)? onFocusChanged;
 
   /// Will be called on [TextField] tap.
   final VoidCallback? onTextFieldTap;
