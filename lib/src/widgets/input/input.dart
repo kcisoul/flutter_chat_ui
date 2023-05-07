@@ -155,7 +155,9 @@ class _InputState extends State<Input> {
             query.viewInsets.bottom + query.padding.bottom,
           )
         : EdgeInsets.zero;
-    if (kIsWeb && defaultTargetPlatform == TargetPlatform.iOS) {
+    if (kIsWeb &&
+        (defaultTargetPlatform == TargetPlatform.iOS ||
+            defaultTargetPlatform == TargetPlatform.android)) {
       safeAreaInsets = EdgeInsets.fromLTRB(
         query.padding.left,
         0,
